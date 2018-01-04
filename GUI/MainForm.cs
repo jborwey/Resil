@@ -13,18 +13,14 @@ namespace GUI
 {
     public partial class MainForm : Form
     {
-        // pvp power 47.76%
-        // increase healing 19.11%
-        // dps classes benefit 40% towards healing from pvp power
-        // 45% battle fatigue
-        // Conversion:  1.65% (3% * 0.65)/sec
-        // 30% pvp power -> 14.4% 1.65% HPS buff by 14.4% -> (1.65 * 1.144) == 1.89% /s
         double stamina;
         double strength;
         double parryRating;
         double baseResilPercentage;
         double resilRating;
         double resilience;
+        double pvpPower;
+        bool bloodPresence;
         string meta;
         HashSet<double> buffs = new HashSet<double>();
 
@@ -51,13 +47,16 @@ namespace GUI
             ResiliencePercentage.Text = $"{Math.Round((resilience * 100), 2) + "%" }";
             TotalResilRating.Text = $"{stats[3]}";
             HealthTabResilience.Text = ResiliencePercentage.Text;
+            EffectiveHealth_StatsChanged(sender, e);
         }
 
         private void EffectiveHealth_StatsChanged(object sender, EventArgs e)
         {
-            CalculateHealing calculateHealing = new CalculateHealing(stamina, resilience);
+            CalculateHealing calculateHealing = new CalculateHealing(stamina, resilience, pvpPower, meta, bloodPresence);
             double effectiveHealth = calculateHealing.EffectiveHealth();
+            double conversionHPS = calculateHealing.ConversionHealing();
             EffectiveHealthTextBox.Text = $"{Math.Round(effectiveHealth / 1000, 0) + "k"}";
+            ConversionHps.Text = $"{Math.Round(conversionHPS, 0) + " / HPS"}";
         }
 
         private void StrengthInput_TextChanged(object sender, EventArgs e)
@@ -159,6 +158,31 @@ namespace GUI
             EffectiveHealth_StatsChanged(sender, e);
         }
 
+        private void BloodPresenceChecked(object sender, EventArgs e)
+        {
+            bloodPresence = BPCheckBox.Checked;
+            EffectiveHealth_StatsChanged(sender, e);
+        }
+
+        private void PvpPower_Changed(object sender, EventArgs e)
+        {
+            var textbox = sender as TextBox;
+            double value;
+            if (double.TryParse(textbox.Text, out value))
+            {
+                if (value < 0)
+                {
+                    textbox.Text = "0";
+                }
+                else if(value >= 100.0)
+                {
+                    textbox.Text = "100";
+                }
+                pvpPower = Double.Parse(PvpPowerPercentage.Text);
+            }
+            EffectiveHealth_StatsChanged(sender, e);
+        }
+
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
@@ -173,7 +197,5 @@ namespace GUI
         {
 
         }
-
-
     }
 }

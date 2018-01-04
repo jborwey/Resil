@@ -66,6 +66,11 @@
             this.HealthTabResilience = new System.Windows.Forms.TextBox();
             this.Stamina = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.BPCheckBox = new System.Windows.Forms.CheckBox();
+            this.PvpPowerPercentage = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.ConversionHps = new System.Windows.Forms.TextBox();
             this.ParryTab.SuspendLayout();
             this.ParryChanceTab.SuspendLayout();
             this.DamageReductionTab.SuspendLayout();
@@ -379,6 +384,11 @@
             // 
             // HealingTab
             // 
+            this.HealingTab.Controls.Add(this.ConversionHps);
+            this.HealingTab.Controls.Add(this.label14);
+            this.HealingTab.Controls.Add(this.label13);
+            this.HealingTab.Controls.Add(this.PvpPowerPercentage);
+            this.HealingTab.Controls.Add(this.BPCheckBox);
             this.HealingTab.Controls.Add(this.EffectiveHealthTextBox);
             this.HealingTab.Controls.Add(this.label12);
             this.HealingTab.Controls.Add(this.label10);
@@ -444,6 +454,52 @@
             this.Stamina.TabIndex = 0;
             this.Stamina.TextChanged += new System.EventHandler(this.Stamina_InputChanged);
             // 
+            // BPCheckBox
+            // 
+            this.BPCheckBox.AutoSize = true;
+            this.BPCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BPCheckBox.Location = new System.Drawing.Point(34, 67);
+            this.BPCheckBox.Name = "BPCheckBox";
+            this.BPCheckBox.Size = new System.Drawing.Size(101, 17);
+            this.BPCheckBox.TabIndex = 6;
+            this.BPCheckBox.Text = "Blood Presence";
+            this.BPCheckBox.UseVisualStyleBackColor = true;
+            this.BPCheckBox.CheckedChanged += new System.EventHandler(this.BloodPresenceChecked);
+            // 
+            // PvpPowerPercentage
+            // 
+            this.PvpPowerPercentage.Location = new System.Drawing.Point(100, 111);
+            this.PvpPowerPercentage.Name = "PvpPowerPercentage";
+            this.PvpPowerPercentage.Size = new System.Drawing.Size(100, 20);
+            this.PvpPowerPercentage.TabIndex = 7;
+            this.PvpPowerPercentage.TextChanged += new System.EventHandler(this.PvpPower_Changed);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(31, 114);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "PvP Power";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(241, 114);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 13);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "Conversion";
+            // 
+            // ConversionHps
+            // 
+            this.ConversionHps.Location = new System.Drawing.Point(343, 110);
+            this.ConversionHps.Name = "ConversionHps";
+            this.ConversionHps.ReadOnly = true;
+            this.ConversionHps.Size = new System.Drawing.Size(100, 20);
+            this.ConversionHps.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -501,6 +557,11 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox EffectiveHealthTextBox;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox BPCheckBox;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox PvpPowerPercentage;
+        private System.Windows.Forms.TextBox ConversionHps;
+        private System.Windows.Forms.Label label14;
     }
 }
 
