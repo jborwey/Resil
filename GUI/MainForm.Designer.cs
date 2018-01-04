@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Calculate = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
             this.StrengthInput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,6 +39,9 @@
             this.ParryChanceDR = new System.Windows.Forms.TextBox();
             this.ParryTab = new System.Windows.Forms.TabControl();
             this.ParryChanceTab = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.RotFCCheckBox = new System.Windows.Forms.CheckBox();
+            this.MotWCheckBox = new System.Windows.Forms.CheckBox();
             this.DamageReductionTab = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.TotalResilRating = new System.Windows.Forms.TextBox();
@@ -55,24 +58,23 @@
             this.BaseResiliencePercentage = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.TotalDR = new System.Windows.Forms.TextBox();
+            this.HealingTab = new System.Windows.Forms.TabPage();
+            this.EffectiveHealthTextBox = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.HealthTabResilience = new System.Windows.Forms.TextBox();
+            this.Stamina = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ParryTab.SuspendLayout();
             this.ParryChanceTab.SuspendLayout();
             this.DamageReductionTab.SuspendLayout();
+            this.HealingTab.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Calculate
-            // 
-            this.Calculate.Location = new System.Drawing.Point(115, 117);
-            this.Calculate.Name = "Calculate";
-            this.Calculate.Size = new System.Drawing.Size(75, 23);
-            this.Calculate.TabIndex = 0;
-            this.Calculate.Text = "Calculate";
-            this.Calculate.UseVisualStyleBackColor = true;
-            this.Calculate.Click += new System.EventHandler(this.ParryChanceCalculation);
             // 
             // StrengthInput
             // 
-            this.StrengthInput.Location = new System.Drawing.Point(90, 27);
+            this.StrengthInput.Location = new System.Drawing.Point(112, 75);
             this.StrengthInput.Name = "StrengthInput";
             this.StrengthInput.Size = new System.Drawing.Size(100, 20);
             this.StrengthInput.TabIndex = 1;
@@ -81,26 +83,26 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 30);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(19, 78);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(62, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Strength";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 74);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(19, 34);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 13);
+            this.label2.Size = new System.Drawing.Size(87, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "Parry Rating";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // ParryRatingInput
             // 
-            this.ParryRatingInput.Location = new System.Drawing.Point(90, 71);
+            this.ParryRatingInput.Location = new System.Drawing.Point(112, 33);
             this.ParryRatingInput.Name = "ParryRatingInput";
             this.ParryRatingInput.Size = new System.Drawing.Size(100, 20);
             this.ParryRatingInput.TabIndex = 4;
@@ -108,7 +110,7 @@
             // 
             // ParryChanceNoDR
             // 
-            this.ParryChanceNoDR.Location = new System.Drawing.Point(379, 27);
+            this.ParryChanceNoDR.Location = new System.Drawing.Point(418, 33);
             this.ParryChanceNoDR.Name = "ParryChanceNoDR";
             this.ParryChanceNoDR.ReadOnly = true;
             this.ParryChanceNoDR.Size = new System.Drawing.Size(100, 20);
@@ -117,34 +119,37 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(221, 30);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(221, 34);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(129, 13);
+            this.label3.Size = new System.Drawing.Size(173, 17);
             this.label3.TabIndex = 6;
             this.label3.Text = "Parry Chance (before DR)";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(221, 74);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(221, 77);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(133, 13);
+            this.label4.Size = new System.Drawing.Size(178, 17);
             this.label4.TabIndex = 7;
             this.label4.Text = "Parry Chance (applied DR)";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // ParryChanceDR
             // 
-            this.ParryChanceDR.Location = new System.Drawing.Point(379, 71);
+            this.ParryChanceDR.Location = new System.Drawing.Point(418, 77);
             this.ParryChanceDR.Name = "ParryChanceDR";
             this.ParryChanceDR.ReadOnly = true;
             this.ParryChanceDR.Size = new System.Drawing.Size(100, 20);
             this.ParryChanceDR.TabIndex = 8;
+            this.ParryChanceDR.TextChanged += new System.EventHandler(this.ParryChance_StatsChanged);
             // 
             // ParryTab
             // 
             this.ParryTab.Controls.Add(this.ParryChanceTab);
             this.ParryTab.Controls.Add(this.DamageReductionTab);
+            this.ParryTab.Controls.Add(this.HealingTab);
             this.ParryTab.Location = new System.Drawing.Point(-1, 0);
             this.ParryTab.Name = "ParryTab";
             this.ParryTab.SelectedIndex = 0;
@@ -153,8 +158,10 @@
             // 
             // ParryChanceTab
             // 
+            this.ParryChanceTab.Controls.Add(this.label11);
+            this.ParryChanceTab.Controls.Add(this.RotFCCheckBox);
+            this.ParryChanceTab.Controls.Add(this.MotWCheckBox);
             this.ParryChanceTab.Controls.Add(this.StrengthInput);
-            this.ParryChanceTab.Controls.Add(this.Calculate);
             this.ParryChanceTab.Controls.Add(this.label4);
             this.ParryChanceTab.Controls.Add(this.ParryChanceDR);
             this.ParryChanceTab.Controls.Add(this.ParryRatingInput);
@@ -169,6 +176,38 @@
             this.ParryChanceTab.TabIndex = 0;
             this.ParryChanceTab.Text = "Parry Chance";
             this.ParryChanceTab.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(19, 105);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(123, 17);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Strength Modifiers";
+            // 
+            // RotFCCheckBox
+            // 
+            this.RotFCCheckBox.AutoSize = true;
+            this.RotFCCheckBox.Location = new System.Drawing.Point(148, 125);
+            this.RotFCCheckBox.Name = "RotFCCheckBox";
+            this.RotFCCheckBox.Size = new System.Drawing.Size(158, 17);
+            this.RotFCCheckBox.TabIndex = 11;
+            this.RotFCCheckBox.Text = "Rune of the Fallen Crusader\r\n";
+            this.RotFCCheckBox.UseVisualStyleBackColor = true;
+            this.RotFCCheckBox.CheckedChanged += new System.EventHandler(this.RotFC_CheckedChanged);
+            // 
+            // MotWCheckBox
+            // 
+            this.MotWCheckBox.AutoSize = true;
+            this.MotWCheckBox.Location = new System.Drawing.Point(38, 125);
+            this.MotWCheckBox.Name = "MotWCheckBox";
+            this.MotWCheckBox.Size = new System.Drawing.Size(104, 17);
+            this.MotWCheckBox.TabIndex = 9;
+            this.MotWCheckBox.Text = "Mark of the Wild";
+            this.MotWCheckBox.UseVisualStyleBackColor = true;
+            this.MotWCheckBox.CheckedChanged += new System.EventHandler(this.MotW_CheckedChanged);
             // 
             // DamageReductionTab
             // 
@@ -221,7 +260,6 @@
             this.label7.Size = new System.Drawing.Size(91, 26);
             this.label7.TabIndex = 12;
             this.label7.Text = "With PvP Trinket \r\nSet Bonus";
-            this.label7.Click += new System.EventHandler(this.label7_Click_1);
             // 
             // BaseLineLable
             // 
@@ -231,8 +269,6 @@
             this.BaseLineLable.Size = new System.Drawing.Size(96, 13);
             this.BaseLineLable.TabIndex = 11;
             this.BaseLineLable.Text = "Over Baseline (0%)";
-            this.BaseLineLable.TextChanged += new System.EventHandler(this.BaseLineLabelChange);
-            this.BaseLineLable.Click += new System.EventHandler(this.label7_Click);
             // 
             // label6
             // 
@@ -242,7 +278,6 @@
             this.label6.Size = new System.Drawing.Size(106, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "Total PvP Resilience";
-            this.label6.Click += new System.EventHandler(this.label6_Click_1);
             // 
             // ResilienceDeltaPvP
             // 
@@ -283,7 +318,6 @@
             this.MetaGemLabel.Size = new System.Drawing.Size(56, 13);
             this.MetaGemLabel.TabIndex = 6;
             this.MetaGemLabel.Text = "Meta Gem";
-            this.MetaGemLabel.Click += new System.EventHandler(this.label6_Click);
             // 
             // ResilienceRatingLabel
             // 
@@ -293,7 +327,6 @@
             this.ResilienceRatingLabel.Size = new System.Drawing.Size(90, 13);
             this.ResilienceRatingLabel.TabIndex = 5;
             this.ResilienceRatingLabel.Text = "Resilience Rating";
-            this.ResilienceRatingLabel.Click += new System.EventHandler(this.Resilience_Click);
             // 
             // ResilRatingAmount
             // 
@@ -324,7 +357,6 @@
             this.BaseResiliencePercentage.Size = new System.Drawing.Size(100, 13);
             this.BaseResiliencePercentage.TabIndex = 2;
             this.BaseResiliencePercentage.Text = "Resilience (Base %)";
-            this.BaseResiliencePercentage.Click += new System.EventHandler(this.BaseResiliencePercentage_Click);
             // 
             // label5
             // 
@@ -335,7 +367,6 @@
             this.label5.Size = new System.Drawing.Size(119, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "Damage Reduction ";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // TotalDR
             // 
@@ -345,6 +376,73 @@
             this.TotalDR.Size = new System.Drawing.Size(100, 20);
             this.TotalDR.TabIndex = 0;
             this.TotalDR.TextChanged += new System.EventHandler(this.InputStatsChanged);
+            // 
+            // HealingTab
+            // 
+            this.HealingTab.Controls.Add(this.EffectiveHealthTextBox);
+            this.HealingTab.Controls.Add(this.label12);
+            this.HealingTab.Controls.Add(this.label10);
+            this.HealingTab.Controls.Add(this.label9);
+            this.HealingTab.Controls.Add(this.HealthTabResilience);
+            this.HealingTab.Controls.Add(this.Stamina);
+            this.HealingTab.Location = new System.Drawing.Point(4, 22);
+            this.HealingTab.Name = "HealingTab";
+            this.HealingTab.Size = new System.Drawing.Size(621, 300);
+            this.HealingTab.TabIndex = 2;
+            this.HealingTab.Text = "Healing / Health";
+            this.HealingTab.UseVisualStyleBackColor = true;
+            // 
+            // EffectiveHealthTextBox
+            // 
+            this.EffectiveHealthTextBox.Location = new System.Drawing.Point(343, 68);
+            this.EffectiveHealthTextBox.Name = "EffectiveHealthTextBox";
+            this.EffectiveHealthTextBox.ReadOnly = true;
+            this.EffectiveHealthTextBox.Size = new System.Drawing.Size(100, 20);
+            this.EffectiveHealthTextBox.TabIndex = 5;
+            this.EffectiveHealthTextBox.TextChanged += new System.EventHandler(this.EffectiveHealth_StatsChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(241, 71);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(83, 13);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "Effective Health";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(241, 35);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(56, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Resilience";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(31, 35);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(45, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Stamina";
+            // 
+            // HealthTabResilience
+            // 
+            this.HealthTabResilience.Location = new System.Drawing.Point(343, 32);
+            this.HealthTabResilience.Name = "HealthTabResilience";
+            this.HealthTabResilience.ReadOnly = true;
+            this.HealthTabResilience.Size = new System.Drawing.Size(100, 20);
+            this.HealthTabResilience.TabIndex = 1;
+            // 
+            // Stamina
+            // 
+            this.Stamina.Location = new System.Drawing.Point(100, 32);
+            this.Stamina.Name = "Stamina";
+            this.Stamina.Size = new System.Drawing.Size(100, 20);
+            this.Stamina.TabIndex = 0;
+            this.Stamina.TextChanged += new System.EventHandler(this.Stamina_InputChanged);
             // 
             // MainForm
             // 
@@ -359,13 +457,13 @@
             this.ParryChanceTab.PerformLayout();
             this.DamageReductionTab.ResumeLayout(false);
             this.DamageReductionTab.PerformLayout();
+            this.HealingTab.ResumeLayout(false);
+            this.HealingTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button Calculate;
         private System.Windows.Forms.TextBox StrengthInput;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -392,6 +490,17 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox TotalResilRating;
+        private System.Windows.Forms.CheckBox RotFCCheckBox;
+        private System.Windows.Forms.CheckBox MotWCheckBox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TabPage HealingTab;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox HealthTabResilience;
+        private System.Windows.Forms.TextBox Stamina;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox EffectiveHealthTextBox;
+        private System.Windows.Forms.Label label12;
     }
 }
 

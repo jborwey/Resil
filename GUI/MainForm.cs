@@ -19,20 +19,23 @@ namespace GUI
         // 45% battle fatigue
         // Conversion:  1.65% (3% * 0.65)/sec
         // 30% pvp power -> 14.4% 1.65% HPS buff by 14.4% -> (1.65 * 1.144) == 1.89% /s
+        double stamina;
+        double strength;
+        double parryRating;
         double baseResilPercentage;
         double resilRating;
+        double resilience;
         string meta;
+        HashSet<double> buffs = new HashSet<double>();
 
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void ParryChanceCalculation(object sender, EventArgs e)
+        private void ParryChance_StatsChanged(object sender, EventArgs e)
         {
-            double strength = Double.Parse(StrengthInput.Text);
-            double parryRating = Double.Parse(ParryRatingInput.Text);
-            CalculateParry calculateParry = new CalculateParry(3, 305, strength, parryRating);
+            CalculateParry calculateParry = new CalculateParry(3, 305, strength, parryRating, buffs);
             double[] stats = calculateParry.DoCalculation();
             ParryChanceNoDR.Text = $"{Math.Round(stats[0], 2)}%";
             ParryChanceDR.Text = $"{Math.Round(stats[1], 2)}%";
@@ -42,15 +45,49 @@ namespace GUI
         {
             CalculateDamageReduction calculateDR = new CalculateDamageReduction(baseResilPercentage, resilRating, meta);
             double[] stats = calculateDR.CalculateResilRating();
+            resilience = stats[2];
             TotalDR.Text = $"{Math.Round(stats[0] * 100, 2) + "%"}";
             ResilienceDeltaPvP.Text = $"{Math.Round(stats[1] * 100, 2) + "%"}";
-            ResiliencePercentage.Text = $"{Math.Round((stats[2] * 100), 2) + "%" }";
+            ResiliencePercentage.Text = $"{Math.Round((resilience * 100), 2) + "%" }";
             TotalResilRating.Text = $"{stats[3]}";
+            HealthTabResilience.Text = ResiliencePercentage.Text;
         }
 
-        private void BaseResiliencePercentage_Click(object sender, EventArgs e)
+        private void EffectiveHealth_StatsChanged(object sender, EventArgs e)
         {
+            CalculateHealing calculateHealing = new CalculateHealing(stamina, resilience);
+            double effectiveHealth = calculateHealing.EffectiveHealth();
+            EffectiveHealthTextBox.Text = $"{Math.Round(effectiveHealth / 1000, 0) + "k"}";
+        }
 
+        private void StrengthInput_TextChanged(object sender, EventArgs e)
+        {
+            var textbox = sender as TextBox;
+            int value;
+            if (int.TryParse(textbox.Text, out value))
+            {
+                if (value < 0)
+                {
+                    textbox.Text = "0";
+                }
+                strength = Double.Parse(StrengthInput.Text);
+            }
+            ParryChance_StatsChanged(sender, e);
+        }
+
+        private void ParryRatingInput_TextChanged(object sender, EventArgs e)
+        {
+            var textbox = sender as TextBox;
+            int value;
+            if (int.TryParse(textbox.Text, out value))
+            {
+                if (value < 0)
+                {
+                    textbox.Text = "0";
+                }
+                parryRating = Double.Parse(ParryRatingInput.Text);
+            }
+            ParryChance_StatsChanged(sender, e);
         }
 
         private void BaseResil_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,14 +99,15 @@ namespace GUI
 
         private void ResilRating_TextChanged(object sender, EventArgs e)
         {
-            //this should never be null 
-            if (ResilRatingAmount.Text != "" && ResilRatingAmount.Text != null)
+            var textbox = sender as TextBox;
+            int value;
+            if (int.TryParse(textbox.Text, out value))
             {
+                if (value < 0)
+                {
+                    textbox.Text = "0";
+                }
                 resilRating = Double.Parse(ResilRatingAmount.Text);
-            }
-            else
-            {
-                resilRating = 0;
             }
             InputStatsChanged(sender, e);
         }
@@ -80,63 +118,45 @@ namespace GUI
             InputStatsChanged(sender, e);
         }
 
-        private void BaseLineLabelChange(object sender, EventArgs e)
+        private void MotW_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (MotWCheckBox.Checked)
+            {
+                buffs.Add(1.05);
+            }
+            else
+            {
+                buffs.Remove(1.05);
+            }
+            ParryChance_StatsChanged(sender, e);
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void RotFC_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (RotFCCheckBox.Checked)
+            {
+                buffs.Add(1.15);
+            }
+            else
+            {
+                buffs.Remove(1.15);
+            }
+            ParryChance_StatsChanged(sender, e);
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void Stamina_InputChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void StrengthInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ParryRatingInput_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Resilience_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
+            var textbox = sender as TextBox;
+            int value;
+            if (int.TryParse(textbox.Text, out value))
+            {
+                if (value < 0)
+                {
+                    textbox.Text = "0";
+                }
+                stamina = Double.Parse(Stamina.Text);
+            }
+            EffectiveHealth_StatsChanged(sender, e);
         }
 
         private void textBox1_TextChanged_1(object sender, EventArgs e)
@@ -149,19 +169,11 @@ namespace GUI
 
         }
 
-        private void label7_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_TextChanged_2(object sender, EventArgs e)
         {
 
         }
+
+
     }
 }

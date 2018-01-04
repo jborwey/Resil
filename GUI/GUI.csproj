@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalculateDamageReduction.cs" />
+    <Compile Include="CalculateHealing.cs" />
     <Compile Include="CalculateParry.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

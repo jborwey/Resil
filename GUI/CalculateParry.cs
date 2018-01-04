@@ -12,13 +12,25 @@ namespace GUI
         private double _baseStrength { get; set; }
         private double _totalStrength { get; set; }
         private double _parryRating { get; set; }
+        private HashSet<double> _buffs { get; set; }
 
-        public CalculateParry(double bP, double bS, double tS, double pR)
+        public CalculateParry(double bP, double bS, double tS, double pR, HashSet<double> buffs)
         {
             _baseParry = bP;
             _baseStrength = bS;
             _totalStrength = tS;
             _parryRating = pR;
+            _buffs = buffs;
+
+            BuffStrength(_buffs);
+        }
+
+        public void BuffStrength(HashSet<double> buffs)
+        {
+            foreach(double buff in buffs)
+            {
+                _totalStrength *= buff;
+            }
         }
 
         public double[] DoCalculation()
