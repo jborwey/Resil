@@ -59,6 +59,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.TotalDR = new System.Windows.Forms.TextBox();
             this.HealingTab = new System.Windows.Forms.TabPage();
+            this.label15 = new System.Windows.Forms.Label();
+            this.ConversionHps = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.PvpPowerPercentage = new System.Windows.Forms.TextBox();
+            this.BPCheckBox = new System.Windows.Forms.CheckBox();
             this.EffectiveHealthTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -66,11 +72,8 @@
             this.HealthTabResilience = new System.Windows.Forms.TextBox();
             this.Stamina = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.BPCheckBox = new System.Windows.Forms.CheckBox();
-            this.PvpPowerPercentage = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.ConversionHps = new System.Windows.Forms.TextBox();
+            this.DisplayHealth = new System.Windows.Forms.TextBox();
+            this.FortitudeCheckBox = new System.Windows.Forms.CheckBox();
             this.ParryTab.SuspendLayout();
             this.ParryChanceTab.SuspendLayout();
             this.DamageReductionTab.SuspendLayout();
@@ -384,6 +387,9 @@
             // 
             // HealingTab
             // 
+            this.HealingTab.Controls.Add(this.FortitudeCheckBox);
+            this.HealingTab.Controls.Add(this.DisplayHealth);
+            this.HealingTab.Controls.Add(this.label15);
             this.HealingTab.Controls.Add(this.ConversionHps);
             this.HealingTab.Controls.Add(this.label14);
             this.HealingTab.Controls.Add(this.label13);
@@ -402,9 +408,64 @@
             this.HealingTab.Text = "Healing / Health";
             this.HealingTab.UseVisualStyleBackColor = true;
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(241, 71);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(87, 13);
+            this.label15.TabIndex = 11;
+            this.label15.Text = "Displayed Health";
+            // 
+            // ConversionHps
+            // 
+            this.ConversionHps.Location = new System.Drawing.Point(343, 144);
+            this.ConversionHps.Name = "ConversionHps";
+            this.ConversionHps.ReadOnly = true;
+            this.ConversionHps.Size = new System.Drawing.Size(100, 20);
+            this.ConversionHps.TabIndex = 10;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(241, 147);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 13);
+            this.label14.TabIndex = 9;
+            this.label14.Text = "Conversion";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(31, 114);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "PvP Power";
+            // 
+            // PvpPowerPercentage
+            // 
+            this.PvpPowerPercentage.Location = new System.Drawing.Point(100, 111);
+            this.PvpPowerPercentage.Name = "PvpPowerPercentage";
+            this.PvpPowerPercentage.Size = new System.Drawing.Size(100, 20);
+            this.PvpPowerPercentage.TabIndex = 7;
+            this.PvpPowerPercentage.TextChanged += new System.EventHandler(this.PvpPower_Changed);
+            // 
+            // BPCheckBox
+            // 
+            this.BPCheckBox.AutoSize = true;
+            this.BPCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.BPCheckBox.Location = new System.Drawing.Point(65, 65);
+            this.BPCheckBox.Name = "BPCheckBox";
+            this.BPCheckBox.Size = new System.Drawing.Size(101, 17);
+            this.BPCheckBox.TabIndex = 6;
+            this.BPCheckBox.Text = "Blood Presence";
+            this.BPCheckBox.UseVisualStyleBackColor = true;
+            this.BPCheckBox.CheckedChanged += new System.EventHandler(this.BloodPresenceChecked);
+            // 
             // EffectiveHealthTextBox
             // 
-            this.EffectiveHealthTextBox.Location = new System.Drawing.Point(343, 68);
+            this.EffectiveHealthTextBox.Location = new System.Drawing.Point(343, 108);
             this.EffectiveHealthTextBox.Name = "EffectiveHealthTextBox";
             this.EffectiveHealthTextBox.ReadOnly = true;
             this.EffectiveHealthTextBox.Size = new System.Drawing.Size(100, 20);
@@ -414,7 +475,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(241, 71);
+            this.label12.Location = new System.Drawing.Point(241, 111);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(83, 13);
             this.label12.TabIndex = 4;
@@ -454,51 +515,25 @@
             this.Stamina.TabIndex = 0;
             this.Stamina.TextChanged += new System.EventHandler(this.Stamina_InputChanged);
             // 
-            // BPCheckBox
+            // DisplayHealth
             // 
-            this.BPCheckBox.AutoSize = true;
-            this.BPCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BPCheckBox.Location = new System.Drawing.Point(34, 67);
-            this.BPCheckBox.Name = "BPCheckBox";
-            this.BPCheckBox.Size = new System.Drawing.Size(101, 17);
-            this.BPCheckBox.TabIndex = 6;
-            this.BPCheckBox.Text = "Blood Presence";
-            this.BPCheckBox.UseVisualStyleBackColor = true;
-            this.BPCheckBox.CheckedChanged += new System.EventHandler(this.BloodPresenceChecked);
+            this.DisplayHealth.Location = new System.Drawing.Point(343, 71);
+            this.DisplayHealth.Name = "DisplayHealth";
+            this.DisplayHealth.ReadOnly = true;
+            this.DisplayHealth.Size = new System.Drawing.Size(100, 20);
+            this.DisplayHealth.TabIndex = 12;
             // 
-            // PvpPowerPercentage
+            // FortitudeCheckBox
             // 
-            this.PvpPowerPercentage.Location = new System.Drawing.Point(100, 111);
-            this.PvpPowerPercentage.Name = "PvpPowerPercentage";
-            this.PvpPowerPercentage.Size = new System.Drawing.Size(100, 20);
-            this.PvpPowerPercentage.TabIndex = 7;
-            this.PvpPowerPercentage.TextChanged += new System.EventHandler(this.PvpPower_Changed);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(31, 114);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(60, 13);
-            this.label13.TabIndex = 8;
-            this.label13.Text = "PvP Power";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(241, 114);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(60, 13);
-            this.label14.TabIndex = 9;
-            this.label14.Text = "Conversion";
-            // 
-            // ConversionHps
-            // 
-            this.ConversionHps.Location = new System.Drawing.Point(343, 110);
-            this.ConversionHps.Name = "ConversionHps";
-            this.ConversionHps.ReadOnly = true;
-            this.ConversionHps.Size = new System.Drawing.Size(100, 20);
-            this.ConversionHps.TabIndex = 10;
+            this.FortitudeCheckBox.AutoSize = true;
+            this.FortitudeCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.FortitudeCheckBox.Location = new System.Drawing.Point(34, 88);
+            this.FortitudeCheckBox.Name = "FortitudeCheckBox";
+            this.FortitudeCheckBox.Size = new System.Drawing.Size(132, 17);
+            this.FortitudeCheckBox.TabIndex = 13;
+            this.FortitudeCheckBox.Text = "Power Word: Fortitude";
+            this.FortitudeCheckBox.UseVisualStyleBackColor = true;
+            this.FortitudeCheckBox.CheckedChanged += new System.EventHandler(this.FortitudeChecked);
             // 
             // MainForm
             // 
@@ -562,6 +597,9 @@
         private System.Windows.Forms.TextBox PvpPowerPercentage;
         private System.Windows.Forms.TextBox ConversionHps;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox DisplayHealth;
+        private System.Windows.Forms.CheckBox FortitudeCheckBox;
     }
 }
 

@@ -14,10 +14,12 @@ namespace GUI
         private string _metaGem { get; set; }
         private double _flatMagicDR = 1;
         private double _conversionTick = 0.03; //3%
-        private double _battleFatigue = 0.55; //45% battle fatigue
+        private double _battleFatigue = 0.40; //60% battle fatigue
         private double _health;
+        private double _fortitude = 1;
+        private double _baseHealth = 146683;
 
-        public CalculateHealing(double stamina, double resilience, double pvpPower, string meta, bool bloodPresence)
+        public CalculateHealing(double stamina, double resilience, double pvpPower, string meta, bool isBloodPresence, bool isFortitude)
         {
             _stamina = stamina;
             _resilience = resilience;
@@ -29,8 +31,9 @@ namespace GUI
                 _stamina += 324;
                 _flatMagicDR = 0.98;
             }
-            if (bloodPresence) { _stamina *= 1.25; }
-            SetHealth(_stamina);
+            if (isBloodPresence) { _stamina *= 1.25; }
+            if (isFortitude) { _fortitude = 1.1; }
+            SetHealth(_stamina, _fortitude);
         }
 
         public double EffectiveHealth()
@@ -50,9 +53,14 @@ namespace GUI
             return _health * HPS * pvpHeal;
         }
 
-        private void SetHealth(double _stamina)
+        public double GetHealth()
         {
-            _health = _stamina * 14;
+            return _health;
+        }
+
+        private void SetHealth(double _stamina, double _fortitude)
+        {
+            _health = _baseHealth + _stamina * 14 * _fortitude;
         }
     }
 }
