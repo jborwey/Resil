@@ -21,7 +21,6 @@ namespace GUI
         double resilience;
         double pvpPower;
         bool bloodPresence;
-        bool fortitude;
         string meta;
         HashSet<double> buffs = new HashSet<double>();
 
@@ -53,13 +52,11 @@ namespace GUI
 
         private void EffectiveHealth_StatsChanged(object sender, EventArgs e)
         {
-            CalculateHealing calculateHealing = new CalculateHealing(stamina, resilience, pvpPower, meta, bloodPresence, fortitude);
+            CalculateHealing calculateHealing = new CalculateHealing(stamina, resilience, pvpPower, meta, bloodPresence);
             double effectiveHealth = calculateHealing.EffectiveHealth();
             double conversionHPS = calculateHealing.ConversionHealing();
-            double displayHealth = calculateHealing.GetHealth();
             EffectiveHealthTextBox.Text = $"{Math.Round(effectiveHealth / 1000, 0) + "k"}";
             ConversionHps.Text = $"{Math.Round(conversionHPS, 0) + " / HPS"}";
-            DisplayHealth.Text = $"{string.Format("{0:n0}", displayHealth)}"; 
         }
 
         private void StrengthInput_TextChanged(object sender, EventArgs e)
@@ -167,13 +164,6 @@ namespace GUI
             EffectiveHealth_StatsChanged(sender, e);
         }
 
-        private void FortitudeChecked(object sender, EventArgs e)
-        {
-            fortitude = FortitudeCheckBox.Checked;
-            EffectiveHealth_StatsChanged(sender, e);
-
-        }
-
         private void PvpPower_Changed(object sender, EventArgs e)
         {
             var textbox = sender as TextBox;
@@ -207,6 +197,5 @@ namespace GUI
         {
 
         }
-
     }
 }
