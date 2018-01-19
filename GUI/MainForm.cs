@@ -20,8 +20,10 @@ namespace GUI
         double resilRating;
         double resilience;
         double pvpPower;
+        double expertise;
         bool bloodPresence;
         bool fortitude;
+        bool flask;
         string meta;
         HashSet<double> buffs = new HashSet<double>();
 
@@ -32,10 +34,12 @@ namespace GUI
 
         private void ParryChance_StatsChanged(object sender, EventArgs e)
         {
-            CalculateParry calculateParry = new CalculateParry(3, 305, strength, parryRating, buffs);
+            CalculateParry calculateParry = new CalculateParry(3, 305, strength, parryRating, flask, buffs);
             double[] stats = calculateParry.DoCalculation();
             ParryChanceNoDR.Text = $"{Math.Round(stats[0], 2)}%";
             ParryChanceDR.Text = $"{Math.Round(stats[1], 2)}%";
+            ParryExpertise.Text = $"{Math.Round((stats[1] - expertise), 2)}%";
+            StrengthBuffed.Text = $"{string.Format("{0:n0}", stats[2])}";
         }
 
         private void InputStatsChanged(object sender, EventArgs e)
@@ -88,6 +92,20 @@ namespace GUI
                     textbox.Text = "0";
                 }
                 parryRating = Double.Parse(ParryRatingInput.Text);
+            }
+            ParryChance_StatsChanged(sender, e);
+        }
+        private void Expertise_Changed(object sender, EventArgs e)
+        {
+            var textbox = sender as TextBox;
+            int value;
+            if (int.TryParse(textbox.Text, out value))
+            {
+                if (value < 0)
+                {
+                    textbox.Text = "0";
+                }
+                expertise = Double.Parse(ExpertiseInput.Text);
             }
             ParryChance_StatsChanged(sender, e);
         }
@@ -146,6 +164,19 @@ namespace GUI
             ParryChance_StatsChanged(sender, e);
         }
 
+        private void DominanceCheck_Changed(object sender, EventArgs e)
+        {
+            if (DominanceBox.Checked)
+            {
+                strength = strength + 5280;
+            }
+            else
+            {
+                strength = strength - 5280;
+            }
+            ParryChance_StatsChanged(sender, e);
+        }
+
         private void Stamina_InputChanged(object sender, EventArgs e)
         {
             var textbox = sender as TextBox;
@@ -174,6 +205,18 @@ namespace GUI
 
         }
 
+        private void CrystalChecked(object sender, EventArgs e)      
+        {
+            flask = InsanityCrystal.Checked;
+            ParryChance_StatsChanged(sender, e);
+            EffectiveHealth_StatsChanged(sender, e);
+        }
+
+        private void CrystalChecked2(object sender, EventArgs e)
+        {
+            InsanityCrystal.Checked = InsanityCrystal2.Checked;
+        }
+
         private void PvpPower_Changed(object sender, EventArgs e)
         {
             var textbox = sender as TextBox;
@@ -193,6 +236,11 @@ namespace GUI
             EffectiveHealth_StatsChanged(sender, e);
         }
 
+        private void ParryChanceExpertise(object sender, EventArgs e)
+        {
+
+        }
+
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
 
@@ -207,6 +255,12 @@ namespace GUI
         {
 
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }

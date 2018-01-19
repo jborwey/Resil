@@ -14,7 +14,7 @@ namespace GUI
         private double _parryRating { get; set; }
         private HashSet<double> _buffs { get; set; }
 
-        public CalculateParry(double bP, double bS, double tS, double pR, HashSet<double> buffs)
+        public CalculateParry(double bP, double bS, double tS, double pR, bool flask, HashSet<double> buffs)
         {
             _baseParry = bP;
             _baseStrength = bS;
@@ -22,6 +22,7 @@ namespace GUI
             _parryRating = pR;
             _buffs = buffs;
 
+            if (flask) { _totalStrength += 500; }
             BuffStrength(_buffs);
         }
 
@@ -39,12 +40,13 @@ namespace GUI
             double Cp = 65.631440;
             double oCP = 0.01523660;
 
-            double[] stats = new double[2];
+            double[] stats = new double[3];
             double noDR = (_totalStrength / 952) + (_parryRating / 885);
             double prDR = _baseParry + (_baseStrength / 952) + Math.Pow(((1 / 235.5) + (k / ((_totalStrength / 952) + (_parryRating / 885)))), -1);
 
             stats[0] = (noDR + _baseParry + (_baseStrength / 952));
             stats[1] = prDR;
+            stats[2] = _totalStrength;
 
             return stats;
         }

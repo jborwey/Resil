@@ -39,6 +39,12 @@
             this.ParryChanceDR = new System.Windows.Forms.TextBox();
             this.ParryTab = new System.Windows.Forms.TabControl();
             this.ParryChanceTab = new System.Windows.Forms.TabPage();
+            this.DominanceBox = new System.Windows.Forms.CheckBox();
+            this.ParryExpertise = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.StrengthBuffed = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.InsanityCrystal = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.RotFCCheckBox = new System.Windows.Forms.CheckBox();
             this.MotWCheckBox = new System.Windows.Forms.CheckBox();
@@ -59,6 +65,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.TotalDR = new System.Windows.Forms.TextBox();
             this.HealingTab = new System.Windows.Forms.TabPage();
+            this.InsanityCrystal2 = new System.Windows.Forms.CheckBox();
+            this.FortitudeCheckBox = new System.Windows.Forms.CheckBox();
+            this.DisplayHealth = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.ConversionHps = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -72,8 +81,8 @@
             this.HealthTabResilience = new System.Windows.Forms.TextBox();
             this.Stamina = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.DisplayHealth = new System.Windows.Forms.TextBox();
-            this.FortitudeCheckBox = new System.Windows.Forms.CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.ExpertiseInput = new System.Windows.Forms.TextBox();
             this.ParryTab.SuspendLayout();
             this.ParryChanceTab.SuspendLayout();
             this.DamageReductionTab.SuspendLayout();
@@ -118,7 +127,7 @@
             // 
             // ParryChanceNoDR
             // 
-            this.ParryChanceNoDR.Location = new System.Drawing.Point(418, 33);
+            this.ParryChanceNoDR.Location = new System.Drawing.Point(446, 33);
             this.ParryChanceNoDR.Name = "ParryChanceNoDR";
             this.ParryChanceNoDR.ReadOnly = true;
             this.ParryChanceNoDR.Size = new System.Drawing.Size(100, 20);
@@ -146,7 +155,7 @@
             // 
             // ParryChanceDR
             // 
-            this.ParryChanceDR.Location = new System.Drawing.Point(418, 77);
+            this.ParryChanceDR.Location = new System.Drawing.Point(446, 76);
             this.ParryChanceDR.Name = "ParryChanceDR";
             this.ParryChanceDR.ReadOnly = true;
             this.ParryChanceDR.Size = new System.Drawing.Size(100, 20);
@@ -166,6 +175,14 @@
             // 
             // ParryChanceTab
             // 
+            this.ParryChanceTab.Controls.Add(this.ExpertiseInput);
+            this.ParryChanceTab.Controls.Add(this.label18);
+            this.ParryChanceTab.Controls.Add(this.DominanceBox);
+            this.ParryChanceTab.Controls.Add(this.ParryExpertise);
+            this.ParryChanceTab.Controls.Add(this.label17);
+            this.ParryChanceTab.Controls.Add(this.StrengthBuffed);
+            this.ParryChanceTab.Controls.Add(this.label16);
+            this.ParryChanceTab.Controls.Add(this.InsanityCrystal);
             this.ParryChanceTab.Controls.Add(this.label11);
             this.ParryChanceTab.Controls.Add(this.RotFCCheckBox);
             this.ParryChanceTab.Controls.Add(this.MotWCheckBox);
@@ -185,11 +202,71 @@
             this.ParryChanceTab.Text = "Parry Chance";
             this.ParryChanceTab.UseVisualStyleBackColor = true;
             // 
+            // DominanceBox
+            // 
+            this.DominanceBox.AutoSize = true;
+            this.DominanceBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DominanceBox.Location = new System.Drawing.Point(312, 229);
+            this.DominanceBox.Name = "DominanceBox";
+            this.DominanceBox.Size = new System.Drawing.Size(126, 17);
+            this.DominanceBox.TabIndex = 21;
+            this.DominanceBox.Text = "Badge of Dominance";
+            this.DominanceBox.UseVisualStyleBackColor = true;
+            this.DominanceBox.CheckedChanged += new System.EventHandler(this.DominanceCheck_Changed);
+            // 
+            // ParryExpertise
+            // 
+            this.ParryExpertise.Location = new System.Drawing.Point(446, 120);
+            this.ParryExpertise.Name = "ParryExpertise";
+            this.ParryExpertise.ReadOnly = true;
+            this.ParryExpertise.Size = new System.Drawing.Size(100, 20);
+            this.ParryExpertise.TabIndex = 19;
+            this.ParryExpertise.TextChanged += new System.EventHandler(this.ParryChanceExpertise);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(221, 119);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(216, 17);
+            this.label17.TabIndex = 18;
+            this.label17.Text = "Parry Chance (applied Expertise)";
+            // 
+            // StrengthBuffed
+            // 
+            this.StrengthBuffed.Location = new System.Drawing.Point(111, 124);
+            this.StrengthBuffed.Name = "StrengthBuffed";
+            this.StrengthBuffed.ReadOnly = true;
+            this.StrengthBuffed.Size = new System.Drawing.Size(100, 20);
+            this.StrengthBuffed.TabIndex = 17;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(20, 127);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(86, 13);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "Strength (buffed)";
+            // 
+            // InsanityCrystal
+            // 
+            this.InsanityCrystal.AutoSize = true;
+            this.InsanityCrystal.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.InsanityCrystal.Location = new System.Drawing.Point(34, 264);
+            this.InsanityCrystal.Name = "InsanityCrystal";
+            this.InsanityCrystal.Size = new System.Drawing.Size(108, 17);
+            this.InsanityCrystal.TabIndex = 15;
+            this.InsanityCrystal.Text = "Crystal of Insanity";
+            this.InsanityCrystal.UseVisualStyleBackColor = true;
+            this.InsanityCrystal.CheckedChanged += new System.EventHandler(this.CrystalChecked);
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(19, 105);
+            this.label11.Location = new System.Drawing.Point(19, 209);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(123, 17);
             this.label11.TabIndex = 13;
@@ -198,7 +275,8 @@
             // RotFCCheckBox
             // 
             this.RotFCCheckBox.AutoSize = true;
-            this.RotFCCheckBox.Location = new System.Drawing.Point(148, 125);
+            this.RotFCCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.RotFCCheckBox.Location = new System.Drawing.Point(148, 229);
             this.RotFCCheckBox.Name = "RotFCCheckBox";
             this.RotFCCheckBox.Size = new System.Drawing.Size(158, 17);
             this.RotFCCheckBox.TabIndex = 11;
@@ -209,7 +287,8 @@
             // MotWCheckBox
             // 
             this.MotWCheckBox.AutoSize = true;
-            this.MotWCheckBox.Location = new System.Drawing.Point(38, 125);
+            this.MotWCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.MotWCheckBox.Location = new System.Drawing.Point(38, 229);
             this.MotWCheckBox.Name = "MotWCheckBox";
             this.MotWCheckBox.Size = new System.Drawing.Size(104, 17);
             this.MotWCheckBox.TabIndex = 9;
@@ -387,6 +466,7 @@
             // 
             // HealingTab
             // 
+            this.HealingTab.Controls.Add(this.InsanityCrystal2);
             this.HealingTab.Controls.Add(this.FortitudeCheckBox);
             this.HealingTab.Controls.Add(this.DisplayHealth);
             this.HealingTab.Controls.Add(this.label15);
@@ -407,6 +487,38 @@
             this.HealingTab.TabIndex = 2;
             this.HealingTab.Text = "Healing / Health";
             this.HealingTab.UseVisualStyleBackColor = true;
+            // 
+            // InsanityCrystal2
+            // 
+            this.InsanityCrystal2.AutoSize = true;
+            this.InsanityCrystal2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.InsanityCrystal2.Location = new System.Drawing.Point(58, 110);
+            this.InsanityCrystal2.Name = "InsanityCrystal2";
+            this.InsanityCrystal2.Size = new System.Drawing.Size(108, 17);
+            this.InsanityCrystal2.TabIndex = 14;
+            this.InsanityCrystal2.Text = "Crystal of Insanity";
+            this.InsanityCrystal2.UseVisualStyleBackColor = true;
+            this.InsanityCrystal2.CheckedChanged += new System.EventHandler(this.CrystalChecked2);
+            // 
+            // FortitudeCheckBox
+            // 
+            this.FortitudeCheckBox.AutoSize = true;
+            this.FortitudeCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.FortitudeCheckBox.Location = new System.Drawing.Point(34, 88);
+            this.FortitudeCheckBox.Name = "FortitudeCheckBox";
+            this.FortitudeCheckBox.Size = new System.Drawing.Size(132, 17);
+            this.FortitudeCheckBox.TabIndex = 13;
+            this.FortitudeCheckBox.Text = "Power Word: Fortitude";
+            this.FortitudeCheckBox.UseVisualStyleBackColor = true;
+            this.FortitudeCheckBox.CheckedChanged += new System.EventHandler(this.FortitudeChecked);
+            // 
+            // DisplayHealth
+            // 
+            this.DisplayHealth.Location = new System.Drawing.Point(343, 71);
+            this.DisplayHealth.Name = "DisplayHealth";
+            this.DisplayHealth.ReadOnly = true;
+            this.DisplayHealth.Size = new System.Drawing.Size(100, 20);
+            this.DisplayHealth.TabIndex = 12;
             // 
             // label15
             // 
@@ -437,7 +549,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(31, 114);
+            this.label13.Location = new System.Drawing.Point(31, 147);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(60, 13);
             this.label13.TabIndex = 8;
@@ -445,7 +557,7 @@
             // 
             // PvpPowerPercentage
             // 
-            this.PvpPowerPercentage.Location = new System.Drawing.Point(100, 111);
+            this.PvpPowerPercentage.Location = new System.Drawing.Point(97, 144);
             this.PvpPowerPercentage.Name = "PvpPowerPercentage";
             this.PvpPowerPercentage.Size = new System.Drawing.Size(100, 20);
             this.PvpPowerPercentage.TabIndex = 7;
@@ -515,25 +627,23 @@
             this.Stamina.TabIndex = 0;
             this.Stamina.TextChanged += new System.EventHandler(this.Stamina_InputChanged);
             // 
-            // DisplayHealth
+            // label18
             // 
-            this.DisplayHealth.Location = new System.Drawing.Point(343, 71);
-            this.DisplayHealth.Name = "DisplayHealth";
-            this.DisplayHealth.ReadOnly = true;
-            this.DisplayHealth.Size = new System.Drawing.Size(100, 20);
-            this.DisplayHealth.TabIndex = 12;
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(19, 170);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(92, 17);
+            this.label18.TabIndex = 22;
+            this.label18.Text = "Expertise (%)";
             // 
-            // FortitudeCheckBox
+            // ExpertiseInput
             // 
-            this.FortitudeCheckBox.AutoSize = true;
-            this.FortitudeCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.FortitudeCheckBox.Location = new System.Drawing.Point(34, 88);
-            this.FortitudeCheckBox.Name = "FortitudeCheckBox";
-            this.FortitudeCheckBox.Size = new System.Drawing.Size(132, 17);
-            this.FortitudeCheckBox.TabIndex = 13;
-            this.FortitudeCheckBox.Text = "Power Word: Fortitude";
-            this.FortitudeCheckBox.UseVisualStyleBackColor = true;
-            this.FortitudeCheckBox.CheckedChanged += new System.EventHandler(this.FortitudeChecked);
+            this.ExpertiseInput.Location = new System.Drawing.Point(111, 167);
+            this.ExpertiseInput.Name = "ExpertiseInput";
+            this.ExpertiseInput.Size = new System.Drawing.Size(100, 20);
+            this.ExpertiseInput.TabIndex = 23;
+            this.ExpertiseInput.TextChanged += new System.EventHandler(this.Expertise_Changed);
             // 
             // MainForm
             // 
@@ -600,6 +710,15 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox DisplayHealth;
         private System.Windows.Forms.CheckBox FortitudeCheckBox;
+        private System.Windows.Forms.CheckBox InsanityCrystal2;
+        private System.Windows.Forms.CheckBox InsanityCrystal;
+        private System.Windows.Forms.TextBox StrengthBuffed;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox ParryExpertise;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.CheckBox DominanceBox;
+        private System.Windows.Forms.TextBox ExpertiseInput;
+        private System.Windows.Forms.Label label18;
     }
 }
 
