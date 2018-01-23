@@ -39,6 +39,10 @@
             this.ParryChanceDR = new System.Windows.Forms.TextBox();
             this.ParryTab = new System.Windows.Forms.TabControl();
             this.ParryChanceTab = new System.Windows.Forms.TabPage();
+            this.TimelessNutrient = new System.Windows.Forms.CheckBox();
+            this.Yulon = new System.Windows.Forms.CheckBox();
+            this.ExpertiseInput = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.DominanceBox = new System.Windows.Forms.CheckBox();
             this.ParryExpertise = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -81,8 +85,7 @@
             this.HealthTabResilience = new System.Windows.Forms.TextBox();
             this.Stamina = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label18 = new System.Windows.Forms.Label();
-            this.ExpertiseInput = new System.Windows.Forms.TextBox();
+            this.VictoryBox = new System.Windows.Forms.CheckBox();
             this.ParryTab.SuspendLayout();
             this.ParryChanceTab.SuspendLayout();
             this.DamageReductionTab.SuspendLayout();
@@ -175,6 +178,9 @@
             // 
             // ParryChanceTab
             // 
+            this.ParryChanceTab.Controls.Add(this.VictoryBox);
+            this.ParryChanceTab.Controls.Add(this.TimelessNutrient);
+            this.ParryChanceTab.Controls.Add(this.Yulon);
             this.ParryChanceTab.Controls.Add(this.ExpertiseInput);
             this.ParryChanceTab.Controls.Add(this.label18);
             this.ParryChanceTab.Controls.Add(this.DominanceBox);
@@ -201,6 +207,50 @@
             this.ParryChanceTab.TabIndex = 0;
             this.ParryChanceTab.Text = "Parry Chance";
             this.ParryChanceTab.UseVisualStyleBackColor = true;
+            // 
+            // TimelessNutrient
+            // 
+            this.TimelessNutrient.AutoSize = true;
+            this.TimelessNutrient.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.TimelessNutrient.Location = new System.Drawing.Point(331, 264);
+            this.TimelessNutrient.Name = "TimelessNutrient";
+            this.TimelessNutrient.Size = new System.Drawing.Size(107, 17);
+            this.TimelessNutrient.TabIndex = 25;
+            this.TimelessNutrient.Text = "Timeless Nutrient";
+            this.TimelessNutrient.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TimelessNutrient.UseVisualStyleBackColor = true;
+            this.TimelessNutrient.CheckedChanged += new System.EventHandler(this.TimelessNutrient_Checked);
+            // 
+            // Yulon
+            // 
+            this.Yulon.AutoSize = true;
+            this.Yulon.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Yulon.Location = new System.Drawing.Point(196, 264);
+            this.Yulon.Name = "Yulon";
+            this.Yulon.Size = new System.Drawing.Size(110, 17);
+            this.Yulon.TabIndex = 24;
+            this.Yulon.Text = "Strength of Yu\'lon";
+            this.Yulon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Yulon.UseVisualStyleBackColor = true;
+            this.Yulon.CheckedChanged += new System.EventHandler(this.Yulon_Checked);
+            // 
+            // ExpertiseInput
+            // 
+            this.ExpertiseInput.Location = new System.Drawing.Point(111, 167);
+            this.ExpertiseInput.Name = "ExpertiseInput";
+            this.ExpertiseInput.Size = new System.Drawing.Size(100, 20);
+            this.ExpertiseInput.TabIndex = 23;
+            this.ExpertiseInput.TextChanged += new System.EventHandler(this.Expertise_Changed);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(19, 170);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(92, 17);
+            this.label18.TabIndex = 22;
+            this.label18.Text = "Expertise (%)";
             // 
             // DominanceBox
             // 
@@ -627,23 +677,17 @@
             this.Stamina.TabIndex = 0;
             this.Stamina.TextChanged += new System.EventHandler(this.Stamina_InputChanged);
             // 
-            // label18
+            // VictoryBox
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(19, 170);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(92, 17);
-            this.label18.TabIndex = 22;
-            this.label18.Text = "Expertise (%)";
-            // 
-            // ExpertiseInput
-            // 
-            this.ExpertiseInput.Location = new System.Drawing.Point(111, 167);
-            this.ExpertiseInput.Name = "ExpertiseInput";
-            this.ExpertiseInput.Size = new System.Drawing.Size(100, 20);
-            this.ExpertiseInput.TabIndex = 23;
-            this.ExpertiseInput.TextChanged += new System.EventHandler(this.Expertise_Changed);
+            this.VictoryBox.AutoSize = true;
+            this.VictoryBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.VictoryBox.Location = new System.Drawing.Point(465, 229);
+            this.VictoryBox.Name = "VictoryBox";
+            this.VictoryBox.Size = new System.Drawing.Size(104, 17);
+            this.VictoryBox.TabIndex = 26;
+            this.VictoryBox.Text = "Badge of Victory";
+            this.VictoryBox.UseVisualStyleBackColor = true;
+            this.VictoryBox.CheckedChanged += new System.EventHandler(this.VictoryCheck_Changed);
             // 
             // MainForm
             // 
@@ -719,6 +763,9 @@
         private System.Windows.Forms.CheckBox DominanceBox;
         private System.Windows.Forms.TextBox ExpertiseInput;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.CheckBox TimelessNutrient;
+        private System.Windows.Forms.CheckBox Yulon;
+        private System.Windows.Forms.CheckBox VictoryBox;
     }
 }
 

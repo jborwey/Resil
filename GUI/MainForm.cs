@@ -25,7 +25,7 @@ namespace GUI
         bool fortitude;
         bool flask;
         string meta;
-        HashSet<double> buffs = new HashSet<double>();
+        HashSet<string> buffs = new HashSet<string>();
 
         public MainForm()
         {
@@ -140,26 +140,28 @@ namespace GUI
 
         private void MotW_CheckedChanged(object sender, EventArgs e)
         {
+            // Mark of the Wild
             if (MotWCheckBox.Checked)
             {
-                buffs.Add(1.05);
+                buffs.Add("motw");
             }
             else
             {
-                buffs.Remove(1.05);
+                buffs.Remove("motw");
             }
             ParryChance_StatsChanged(sender, e);
         }
 
         private void RotFC_CheckedChanged(object sender, EventArgs e)
         {
+            // Rune of the Fallen Crusader
             if (RotFCCheckBox.Checked)
             {
-                buffs.Add(1.15);
+                buffs.Add("rotfc");
             }
             else
             {
-                buffs.Remove(1.15);
+                buffs.Remove("rotfc");
             }
             ParryChance_StatsChanged(sender, e);
         }
@@ -173,6 +175,45 @@ namespace GUI
             else
             {
                 strength = strength - 5280;
+            }
+            ParryChance_StatsChanged(sender, e);
+        }
+
+        private void VictoryCheck_Changed(object sender, EventArgs e)
+        {
+            if (VictoryBox.Checked)
+            {
+                strength = strength + 2580;
+            }
+            else
+            {
+                strength = strength - 2580;
+            }
+            ParryChance_StatsChanged(sender, e);
+        }
+
+        private void Yulon_Checked(object sender, EventArgs e)
+        {
+            if (Yulon.Checked)
+            {
+                buffs.Add("yulon");
+            }
+            else
+            {
+                buffs.Remove("yulon");
+            }
+            ParryChance_StatsChanged(sender, e);
+        }
+
+        private void TimelessNutrient_Checked(object sender, EventArgs e)
+        {
+            if (TimelessNutrient.Checked)
+            {
+                buffs.Add("nutrient");
+            }
+            else
+            {
+                buffs.Remove("nutrient");
             }
             ParryChance_StatsChanged(sender, e);
         }
@@ -260,7 +301,5 @@ namespace GUI
         {
 
         }
-
-
     }
 }

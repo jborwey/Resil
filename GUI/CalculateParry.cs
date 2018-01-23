@@ -12,9 +12,9 @@ namespace GUI
         private double _baseStrength { get; set; }
         private double _totalStrength { get; set; }
         private double _parryRating { get; set; }
-        private HashSet<double> _buffs { get; set; }
+        private HashSet<string> _buffs { get; set; }
 
-        public CalculateParry(double bP, double bS, double tS, double pR, bool flask, HashSet<double> buffs)
+        public CalculateParry(double bP, double bS, double tS, double pR, bool flask, HashSet<string> buffs)
         {
             _baseParry = bP;
             _baseStrength = bS;
@@ -26,11 +26,14 @@ namespace GUI
             BuffStrength(_buffs);
         }
 
-        public void BuffStrength(HashSet<double> buffs)
+        public void BuffStrength(HashSet<string> buffs)
         {
-            foreach(double buff in buffs)
+            foreach(string buff in buffs)
             {
-                _totalStrength *= buff;
+                if (buff == "motw") { _totalStrength *= 1.05; }
+                else if (buff == "rotfc") { _totalStrength *= 1.15; }
+                else if (buff == "yulon") { _totalStrength *= 1.20; }
+                else if (buff == "nutrient") { _totalStrength *= 1.05; }
             }
         }
 
