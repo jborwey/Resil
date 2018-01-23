@@ -16,10 +16,9 @@ namespace GUI
         private double _conversionTick = 0.03; //3%
         private double _battleFatigue = 0.40; //60% battle fatigue
         private double _health;
-        private double _fortitude = 1;
         private double _baseHealth = 146683;
 
-        public CalculateHealing(double stamina, double resilience, double pvpPower, string meta, bool isBloodPresence, bool isFortitude)
+        public CalculateHealing(double stamina, double resilience, double pvpPower, string meta, HashSet<string> buffs)
         {
             _stamina = stamina;
             _resilience = resilience;
@@ -31,9 +30,27 @@ namespace GUI
                 _stamina += 324;
                 _flatMagicDR = 0.98;
             }
-            if (isBloodPresence) { _stamina *= 1.25; }
-            if (isFortitude) { _fortitude = 1.1; }
-            SetHealth(_stamina, _fortitude);
+
+            BuffStamina(buffs);
+            SetHealth(_stamina);
+        }
+
+        public void BuffStamina(HashSet<string> buffs)
+        {
+            foreach (string buff in buffs)
+            {
+                if (buff == "bPresence") { _stamina *= 1.25; }
+                else if (buff == "fortitude") { _stamina *= 1.1; }
+                else if (buff == "motw") { _stamina *= 1.05; }
+                else if (buff == "yulon") { _stamina *= 1.20; }
+                else if (buff == "nutrient") { _stamina *= 1.05; }
+                else if (buff == "crystal") { _stamina = _stamina + 500; }
+            }
+        }
+
+        public double GetBuffedStamina()
+        {
+            return _stamina;
         }
 
         public double EffectiveHealth()
@@ -58,9 +75,9 @@ namespace GUI
             return _health;
         }
 
-        private void SetHealth(double _stamina, double _fortitude)
+        private void SetHealth(double _stamina)
         {
-            _health = _baseHealth + _stamina * 14 * _fortitude;
+            _health = _baseHealth + _stamina * 14;
         }
     }
 }

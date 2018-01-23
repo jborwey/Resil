@@ -21,9 +21,6 @@ namespace GUI
         double resilience;
         double pvpPower;
         double expertise;
-        bool bloodPresence;
-        bool fortitude;
-        bool flask;
         string meta;
         HashSet<string> buffs = new HashSet<string>();
 
@@ -34,7 +31,7 @@ namespace GUI
 
         private void ParryChance_StatsChanged(object sender, EventArgs e)
         {
-            CalculateParry calculateParry = new CalculateParry(3, 305, strength, parryRating, flask, buffs);
+            CalculateParry calculateParry = new CalculateParry(3, 305, strength, parryRating, buffs);
             double[] stats = calculateParry.DoCalculation();
             ParryChanceNoDR.Text = $"{Math.Round(stats[0], 2)}%";
             ParryChanceDR.Text = $"{Math.Round(stats[1], 2)}%";
@@ -57,10 +54,12 @@ namespace GUI
 
         private void EffectiveHealth_StatsChanged(object sender, EventArgs e)
         {
-            CalculateHealing calculateHealing = new CalculateHealing(stamina, resilience, pvpPower, meta, bloodPresence, fortitude);
+            CalculateHealing calculateHealing = new CalculateHealing(stamina, resilience, pvpPower, meta, buffs);
+            double buffedStam = calculateHealing.GetBuffedStamina();
             double effectiveHealth = calculateHealing.EffectiveHealth();
             double conversionHPS = calculateHealing.ConversionHealing();
             double displayHealth = calculateHealing.GetHealth();
+            StaminaBuffed.Text = $"{string.Format("{0:n0}", buffedStam)}";
             EffectiveHealthTextBox.Text = $"{Math.Round(effectiveHealth / 1000, 0) + "k"}";
             ConversionHps.Text = $"{Math.Round(conversionHPS, 0) + " / HPS"}";
             DisplayHealth.Text = $"{string.Format("{0:n0}", displayHealth)}"; 
@@ -194,28 +193,46 @@ namespace GUI
 
         private void Yulon_Checked(object sender, EventArgs e)
         {
-            if (Yulon.Checked)
+            if (Yulon.Checked && !HasBuff("yulon"))
             {
                 buffs.Add("yulon");
+                Yulon2.Checked = Yulon.Checked;
+
+                ParryChance_StatsChanged(sender, e);
+
+            }
+            else if (Yulon.Checked && HasBuff("yulon"))
+            {
+                ParryChance_StatsChanged(sender, e);
             }
             else
             {
                 buffs.Remove("yulon");
+                Yulon2.Checked = Yulon.Checked;
+                ParryChance_StatsChanged(sender, e);
             }
-            ParryChance_StatsChanged(sender, e);
         }
 
         private void TimelessNutrient_Checked(object sender, EventArgs e)
         {
-            if (TimelessNutrient.Checked)
+            if (TimelessNutrient.Checked && !HasBuff("nutrient"))
             {
                 buffs.Add("nutrient");
+                TimelessNutrient2.Checked = TimelessNutrient.Checked;
+
+                ParryChance_StatsChanged(sender, e);
+
+            }
+            else if (TimelessNutrient.Checked && HasBuff("nutrient"))
+            {
+                ParryChance_StatsChanged(sender, e);
             }
             else
             {
                 buffs.Remove("nutrient");
+                TimelessNutrient2.Checked = TimelessNutrient.Checked;
+                ParryChance_StatsChanged(sender, e);
             }
-            ParryChance_StatsChanged(sender, e);
         }
 
         private void Stamina_InputChanged(object sender, EventArgs e)
@@ -235,27 +252,117 @@ namespace GUI
 
         private void BloodPresenceChecked(object sender, EventArgs e)
         {
-            bloodPresence = BPCheckBox.Checked;
+            if (BPCheckBox.Checked)
+            {
+                buffs.Add("bPresence");
+            }
+            else
+            {
+                buffs.Remove("bPresence");
+            }
             EffectiveHealth_StatsChanged(sender, e);
         }
 
         private void FortitudeChecked(object sender, EventArgs e)
         {
-            fortitude = FortitudeCheckBox.Checked;
+            if (BPCheckBox.Checked)
+            {
+                buffs.Add("fortitude");
+            }
+            else
+            {
+                buffs.Remove("fortitude");
+            }
             EffectiveHealth_StatsChanged(sender, e);
 
         }
 
         private void CrystalChecked(object sender, EventArgs e)      
         {
-            flask = InsanityCrystal.Checked;
-            ParryChance_StatsChanged(sender, e);
-            EffectiveHealth_StatsChanged(sender, e);
+            if (InsanityCrystal.Checked && !HasBuff("crystal"))
+            {
+                buffs.Add("crystal");
+                InsanityCrystal2.Checked = InsanityCrystal.Checked;
+
+                ParryChance_StatsChanged(sender, e);
+
+            }
+            else if (InsanityCrystal.Checked && HasBuff("crystal"))
+            {
+                ParryChance_StatsChanged(sender, e);
+            }
+            else
+            {
+                buffs.Remove("crystal");
+                InsanityCrystal2.Checked = InsanityCrystal.Checked;
+                ParryChance_StatsChanged(sender, e);
+            }
         }
 
         private void CrystalChecked2(object sender, EventArgs e)
         {
-            InsanityCrystal.Checked = InsanityCrystal2.Checked;
+            if (InsanityCrystal2.Checked && !HasBuff("crystal"))
+            {
+                buffs.Add("crystal");
+                InsanityCrystal.Checked = InsanityCrystal2.Checked;
+
+                EffectiveHealth_StatsChanged(sender, e);
+
+            }
+            else if (InsanityCrystal2.Checked && HasBuff("crystal"))
+            {
+                EffectiveHealth_StatsChanged(sender, e);
+            }
+            else
+            {
+                buffs.Remove("crystal");
+                InsanityCrystal.Checked = InsanityCrystal2.Checked;
+                EffectiveHealth_StatsChanged(sender, e);
+            }
+        }
+
+        private void Yulon2_Checked(object sender, EventArgs e)
+        {
+            if (Yulon2.Checked && !HasBuff("yulon"))
+            {
+                buffs.Add("yulon");
+                Yulon.Checked = Yulon2.Checked;
+
+                EffectiveHealth_StatsChanged(sender, e);
+
+            }
+            else if (Yulon2.Checked && HasBuff("yulon"))
+            {
+                EffectiveHealth_StatsChanged(sender, e);
+            }
+            else
+            {
+                buffs.Remove("yulon");
+                Yulon.Checked = Yulon2.Checked;
+                EffectiveHealth_StatsChanged(sender, e);
+            }
+        }
+
+        private void TimelessNutrient2_Checked(object sender, EventArgs e)
+        {
+            if (TimelessNutrient2.Checked && !HasBuff("nutrient"))
+            {
+                buffs.Add("nutrient");
+                TimelessNutrient.Checked = TimelessNutrient2.Checked;
+
+                EffectiveHealth_StatsChanged(sender, e);
+
+            }
+            else if (TimelessNutrient2.Checked && HasBuff("nutrient"))
+            {
+                EffectiveHealth_StatsChanged(sender, e);
+            }
+            else
+            {
+                buffs.Remove("nutrient");
+                TimelessNutrient.Checked = TimelessNutrient2.Checked;
+                EffectiveHealth_StatsChanged(sender, e);
+            }
         }
 
         private void PvpPower_Changed(object sender, EventArgs e)
@@ -268,7 +375,7 @@ namespace GUI
                 {
                     textbox.Text = "0";
                 }
-                else if(value >= 100.0)
+                else if (value >= 100.0)
                 {
                     textbox.Text = "100";
                 }
@@ -277,27 +384,12 @@ namespace GUI
             EffectiveHealth_StatsChanged(sender, e);
         }
 
+        private bool HasBuff(string buff)
+        {
+            return buffs.Contains(buff);
+        }
+
         private void ParryChanceExpertise(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Resilience_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }

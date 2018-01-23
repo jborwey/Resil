@@ -14,7 +14,7 @@ namespace GUI
         private double _parryRating { get; set; }
         private HashSet<string> _buffs { get; set; }
 
-        public CalculateParry(double bP, double bS, double tS, double pR, bool flask, HashSet<string> buffs)
+        public CalculateParry(double bP, double bS, double tS, double pR, HashSet<string> buffs)
         {
             _baseParry = bP;
             _baseStrength = bS;
@@ -22,7 +22,6 @@ namespace GUI
             _parryRating = pR;
             _buffs = buffs;
 
-            if (flask) { _totalStrength += 500; }
             BuffStrength(_buffs);
         }
 
@@ -34,6 +33,7 @@ namespace GUI
                 else if (buff == "rotfc") { _totalStrength *= 1.15; }
                 else if (buff == "yulon") { _totalStrength *= 1.20; }
                 else if (buff == "nutrient") { _totalStrength *= 1.05; }
+                else if (buff == "crystal") { _totalStrength = _totalStrength + 500; }
             }
         }
 
